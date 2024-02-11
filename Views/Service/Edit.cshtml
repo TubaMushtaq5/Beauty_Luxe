@@ -1,0 +1,166 @@
+﻿@model BeautyLuxe.Models.Service
+<br>
+
+<style>
+body {
+background-color: #fef4ff;
+}
+
+    .custom-button {
+        background-color: #ff8fab;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .custom-button:hover {
+        background-color: #ff6b9c; /* Change color for hover if needed */
+    }
+</style>
+
+
+
+<div class="container edit-container card-border" style="margin: 5rem auto" >
+    <div class="text-center mt-4">
+
+        <h2>Edit Service</h2>
+    </div>
+
+    <form asp-controller="Service" asp-action="Edit" asp-route-id="@Model.Id" method="post" class="edit-form">
+        <div class="form-group">
+            <label asp-for="Name" class="form-label">Service Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Price" class="form-label">Price</label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Slots</label>
+            <div id="slot-container">
+                @for (var i = 0; i < Model.Slots.Count; i++)
+                {
+                    @if (Model.Slots[i].IsAvailable)
+                    {
+                        <div class="slot-input d-flex">
+                            <input type="hidden" name="Slots[@i].Id" value="@Model.Slots[i].Id" />
+                            <input name="Slots[@i].SlotTime" class="form-control" placeholder="mm-dd-yyyy HH:mm PM" value="@Model.Slots[i].SlotTime" />
+                            <button type="button" class="btn btn-danger delete-slot-btn" onclick="deleteSlot(this)">Delete</button>
+                        </div>
+                    }
+                  
+                }
+                <button type="button" id="add-slot-btn" class="btn btn-secondary mt-4 ms-0">Add More Slot</button>
+            </div>
+            
+        </div>
+
+        <div class="form-group mt-4">
+            <button type="submit" class="custom-button">Update</button>
+            <a asp-controller="Service" asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let slotCount = @Model.Slots.Count; 
+
+        document.getElementById('add-slot-btn').addEventListener('click', function () {
+            const slotContainer = document.getElementById('slot-container');
+            const newSlotInput = document.createElement('div');
+            newSlotInput.classList.add('slot-input');
+            newSlotInput.id = "slot-" + slotCount;
+           
+            newSlotInput.innerHTML = `
+
+                                    <input type="text" name="Slots[${slotCount}].SlotTime" class="form-control" placeholder="mm-dd-yyyy HH:mm PM"  />
+                `;
+            slotContainer.appendChild(newSlotInput);
+            slotCount++;
+        });
+    });
+    
+    function deleteSlot(btn) {
+        const slotInput = btn.parentElement;
+        const slotId = slotInput.querySelector('input[name$=".Id"]').value;
+
+       
+        fetch(`/Service/DeleteSlot?slotId=${slotId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+        })
+            .then(response => {
+                if (response.ok) {
+                    slotInput.remove();
+                } else {
+                    console.error('Failed to delete slot.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+</script>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .edit-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .edit-form {
+        width: 100%;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    /*.btn-primary {*/
+    /*    background-color: #007bff;*/
+    /*    border-color: #007bff;*/
+    /*}*/
+
+    /*.btn-secondary {*/
+    /*    background-color: #6c757d;*/
+    /*    border-color: #6c757d;*/
+    /*    margin-left: 10px;*/
+    /*}*/
+
+        /*.btn-primary:hover,*/
+        /*.btn-secondary:hover {*/
+        /*    background-color: #0056b3;*/
+        /*    border-color: #0056b3;*/
+        /*}*/
+</style>

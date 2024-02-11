@@ -1,0 +1,122 @@
+﻿@model IEnumerable<BeautyLuxe.Models.Service>
+<style>
+    .custom-button {
+        background-color: #ff8fab;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .custom-button:hover {
+            background-color: #ff6b9c; /* Change color for hover if needed */
+        }
+</style>
+<br>
+
+<div class="container" style="margin: 2rem auto">
+    <div class="text-center mt-4">
+
+        <h2 class="display-4">Our Services</h2>
+    </div>
+    @if (User.IsInRole("admin"))
+    {
+        <div class="form-group">
+            <a asp-controller="Service" asp-action="Create" class="custom-button">Create a New Service</a>
+        </div>
+    }
+    <div class="service-grid mt-4">
+        @foreach (var service in Model)
+        {
+            <div class="service-card">
+                <h4>@service.Name</h4>
+                <p>
+                    @if (service.Description.Length > 50)
+                    {
+                        @service.Description.Substring(0, 50) @Html.Raw("...")
+                    }
+                    else
+                    {
+                        @service.Description
+                    }
+                    
+                </p>
+                <p class="price">Price: @service.Price</p>
+                <div class="service-actions">
+                    <a asp-controller="Service" asp-action="Details" asp-route-id="@service.Id" class="custom-button">Details</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("admin"))
+                        {
+                            <a asp-controller="Service" asp-action="Edit" asp-route-id="@service.Id" class="btn btn-warning">Edit</a>
+                            <a asp-controller="Service" asp-action="Delete" asp-route-id="@service.Id" class="btn btn-danger">Delete</a>
+                        }
+
+                        @if (User.IsInRole("client"))
+                        {
+                            <a asp-controller="Booking" asp-action="BookAppointment" asp-route-id="@service.Id" class="custom-button">Book Appointment</a>
+                        }
+                    }
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-warning">Book Appointment</a>
+                    }
+                    
+
+                    
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .service-card {
+        border: 1px solid #dee2e6;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        text-align: center;
+    }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .price {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .service-actions {
+        margin-top: 15px;
+    }
+
+        .service-actions a {
+            margin-right: 10px;
+        }
+
+    .display-4 {
+        color: #343a40;
+    }
+</style>

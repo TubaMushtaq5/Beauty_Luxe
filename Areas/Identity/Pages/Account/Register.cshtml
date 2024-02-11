@@ -1,0 +1,92 @@
+﻿@page
+@model RegisterModel
+
+
+<style>
+    .register-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    .form-floating input {
+        border-radius: 15px; /* Adjust the border-radius as needed */
+        padding: 10px; /* Adjust the padding as needed */
+    }
+    .register-submit {
+        border-radius: 15px; /* Adjust the border-radius as needed */
+        font-size: 14px; /* Adjust the font-size as needed */
+        background-color: #00a6ff; /* Change this to the desired color */
+        /* Change this to match the background color for a consistent look */
+        color: #fff; /* Text color */
+    }
+    .register-form {
+        width: 50%;
+        padding: 20px;
+    }
+
+    .welcome-section {
+        width: 40%;
+        background: linear-gradient(to bottom right, #BADFE7, #6FB3B8, #F4A4A4);
+        color: #fff;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .welcome-section h3 {
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            margin-bottom: 20px;
+        }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="register-container">
+    <div class="welcome-section overlayed-bg bg-1">
+        <h3>Welcome to our website!</h3>
+        <center>
+            <p>Create an account to explore exciting features and personalized services.</p></center>
+    </div>
+
+    <div class="register-form">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <center>
+                <h1>Sign Up for Your Account</h1></center>
+            <center><h>Create Account</h></center>
+            <br><br>
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.FullName" class="form-control" autocomplete="username" aria-required="true" placeholder="John Doe"/>
+                <label asp-for="Input.FullName">FullName</label>
+                <span asp-validation-for="Input.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com"/>
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password"/>
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password"/>
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <br>
+            <center><button id="registerSubmit" type="submit" class="w-50 btn register-submit btn-lg btn-primary rounded-pill">Register</button></center>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

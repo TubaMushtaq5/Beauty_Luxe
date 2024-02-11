@@ -1,0 +1,102 @@
+﻿@model IEnumerable<BeautyLuxe.Models.BeautyTip>
+<style>
+    /* ... Existing styles ... */
+
+    .btn-create-tip {
+        background-color: #ff8fab;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-create-tip:hover {
+            background-color: #ff6b9c; /* Change color for hover if needed */
+        }
+</style>
+<br>
+
+<div class="container">
+    <div class="text-center mt-2">
+        <h2 class="display-4">Discover Beauty Tips</h2>
+    </div>
+    @if (User.IsInRole("admin"))
+    {
+        <br>
+
+        <br>
+        <div class="form-group mt-2">
+            <a asp-controller="BeautyTips" asp-action="CreateBeautyTip" class="btn btn-create-tip">Create a New Beauty Tip</a>
+        </div>
+    }
+
+    <div class="row mt-4">
+        @foreach (var beautyTip in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow">
+                    <div class="card-color d-flex align-items-center justify-content-center" style="background-color: grey; padding:20px; " >
+                        <h3 class="card-title">@beautyTip.Title</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">@beautyTip.Description</p>
+                        <div class="text-center mt-4">
+                            <a asp-controller="BeautyTips" asp-action="BeautyTipDetail" asp-route-id="@beautyTip.Id" class="btn-create-tip">Read More</a>
+                            @if (User.IsInRole("admin"))
+                            {
+                                <a asp-controller="BeautyTips" asp-action="EditBeautyTip" asp-route-id="@beautyTip.Id" class="btn btn-warning">Edit</a>
+                                <a asp-controller="BeautyTips" asp-action="DeleteBeautyTip" asp-route-id="@beautyTip.Id" class="btn btn-danger ">Delete</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+        }
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 1200px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        transition: transform 0.3s;
+    }
+    /* Button Colors */
+   
+
+      
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
+    .card-img-top {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        object-fit: cover;
+        height: 200px;
+    }
+
+    
+    .card-color{
+        color: white;
+    }
+  
+    .card-color {
+        height: 100px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+</style>

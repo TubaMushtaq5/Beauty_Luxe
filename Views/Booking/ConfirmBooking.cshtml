@@ -1,0 +1,46 @@
+﻿@model BeautyLuxe.Models.Booking
+<br>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="text-center">
+                <h2 class="display-4">Booking Confirmation</h2>
+            </div>
+
+            <div class="confirmation-details mt-4">
+                <p class="lead">Thank you, @Model.User.FullName, for booking an appointment!</p>
+                <p class="lead">You have booked an appointment for the service: <strong>@Model.Service.Name</strong>.</p>
+                <p class="lead">Your appointment is scheduled for the following slot: <strong>@Model.Slot.SlotTime</strong>.</p>
+                <p class="lead">Your appointment has been successfully booked. We look forward to serving you!</p>
+
+                <!-- Back Button -->
+                <a href="@Url.Action("Index", "User")" class="btn btn-primary mt-4">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 800px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .confirmation-details {
+        text-align: center;
+    }
+
+    .lead {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+</style>

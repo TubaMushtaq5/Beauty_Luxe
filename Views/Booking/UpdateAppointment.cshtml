@@ -1,0 +1,99 @@
+﻿<!-- UpdateAppointment.cshtml -->
+@model BeautyLuxe.Models.Booking
+
+<br>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="text-center">
+                <h2 class="display-4">Update Appointment</h2>
+            </div>
+
+            <form asp-controller="Booking" asp-action="SaveUpdatedAppointment" method="post" class="mt-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.UserId)
+                @Html.HiddenFor(model => model.ServiceId)
+
+                <div class="form-group">
+                    
+
+                    <!-- Show available slots only -->
+                    @if (ViewBag.slots.Count > 1)
+                    {
+                        <label asp-for="SlotId" class="control-label">Select a New Slot</label>
+
+                        <div class="form-check mt-2">
+                            <input type="radio" asp-for="SlotId" class="form-check-input" value="@Model.SlotId" id="@($"slot-{Model.SlotId}")" name="SlotId" checked />
+                            <label class="form-check-label" for="@($"slot-{Model.SlotId}")">
+                                @Model.Slot.SlotTime (Current Slot)
+                            </label>
+                        </div>
+                        @foreach (var slot in ViewBag.slots)
+                        {
+                            <div class="form-check mt-2">
+                                <input type="radio" asp-for="SlotId" class="form-check-input" value="@slot.Id" id="@($"slot-{slot.Id}")" name="SlotId" />
+                                <label class="form-check-label" for="@($"slot-{slot.Id}")">
+                                    @slot.SlotTime
+                                </label>
+                            </div>
+                        }
+                        <span asp-validation-for="SlotId" class="text-danger"></span>
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary">Update Appointment</button>
+                        </div>
+                    }
+
+                    
+
+                    else
+                    {
+                        <p>No other slot available</p>
+                    }
+
+                    <a asp-controller="Booking" asp-action="UserBookings" class="btn btn-secondary">Back to Bookings</a>
+                    
+                </div>
+
+               
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #fef4ff;
+    }
+
+    .container {
+        max-width: 600px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-check {
+        display: flex;
+        align-items: center;
+    }
+
+    /*.btn-primary {*/
+    /*    background-color: #007bff;*/
+    /*    border-color: #007bff;*/
+    /*}*/
+    
+    
+    /*    .btn-primary:hover {*/
+    /*        background-color: #0056b3;*/
+    /*        border-color: #0056b3;*/
+    /*    }*/
+</style>

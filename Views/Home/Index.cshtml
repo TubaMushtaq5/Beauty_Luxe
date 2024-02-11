@@ -1,0 +1,300 @@
+﻿@{
+    ViewData["Title"] = "Home - BeautyLuxe";
+}
+@model IEnumerable<BeautyLuxe.Models.Service>
+<style>
+    body {
+        /*background: linear-gradient(to bottom right, #BADFE7, #6FB3B8, #F4A4A4);*/
+        color: black;
+    }
+
+    .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .service-card {
+        border: 1px solid #dee2e6;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .hero-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 50px;
+    }
+
+    .hero-content {
+        max-width: 500px;
+    }
+
+        .hero-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .hero-content p {
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+    /*.btn-primary {*/
+    /*    background-color: #008080;*/
+    /*    color: #fff;*/
+    /*    padding: 10px 20px;*/
+    /*    border-radius: 5px;*/
+    /*    text-decoration: none;*/
+    /*}*/
+
+    .hero-image {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .featured-products,
+    .services-offered,
+    .customer-reviews,
+    .newsletter {
+        margin-bottom: 50px;
+    }
+
+    h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .product-list,
+    .service-list,
+    .review-list {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .product-item,
+    .service-item,
+    .review-item {
+        width: 300px;
+        padding: 20px;
+        margin-bottom: 30px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #dee2e6;
+    }
+
+        .product-item img,
+        .service-item img,
+        .review-item img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+    .customer-name {
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    .newsletter form {
+        display: flex;
+        align-items: center;
+    }
+
+    .newsletter input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px;
+    }
+
+    .newsletter button {
+        background-color: #008080;
+        color: #fff;
+        padding: 10px 20px;
+        border: 1px solid #008080;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+    }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .price {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .service-actions {
+        margin-top: 15px;
+    }
+
+        .service-actions a {
+            margin-right: 10px;
+        }
+
+    .display-4 {
+        color: #343a40;
+    }
+    .welcome-section {
+        /*text-align: center;*/
+        /*padding: 60px 0;*/
+    }
+
+        .welcome-section h1 {
+            /*font-size: 45px;*/
+            
+        }
+
+        .welcome-section p {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+    /* Add the styles directly in the head if needed */
+    button {
+        background-color: #ff8fab;
+        border: 1px solid #ff8fab;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background-color: #ff6b9c; /* Change color for hover if needed */
+        border: 1px solid #ff6b9c;
+            background-color: #ff8fab;
+            border: 1px solid #ff8fab;
+    }
+
+
+</style>
+
+<div class="welcome-section">
+    <div class="d-flex justify-content-between align-items-center gap-2">
+
+        <div class="col-7">
+
+            <h1 style="" class="">Welcome to BeautyLuxe</h1>
+
+            <p style="">
+                Discover the epitome of beauty with BeautyLuxe, where every detail is crafted to illuminate your unique radiance. At BeautyLuxe, we go beyond traditional beauty standards, offering a sanctuary of premium skincare, rejuvenating facial treatments, and an array of exquisite makeup products meticulously curated to accentuate and celebrate your natural beauty.
+
+                @* Immerse yourself in an ambiance where excellence meets innovation. Our commitment to perfection extends beyond the surface, delving into the heart of wellness. Each product and treatment is a testament to our unwavering dedication to providing an unparalleled experience that transcends the ordinary. *@
+                @* *@
+                @* *@
+                @* Your beauty, your way—BeautyLuxe invites you to revel in the art of self-discovery and celebrate the essence of your unique allure. *@
+            </p>
+            <a href="@Url.Action("Index", "Service")">
+                <button>Explore Now</button>
+            </a>
+
+
+            @*  <button type="submit" class="btn btn-primary explore-btn">Explore Now</button>*@
+
+
+            </div>
+        <div class="col-5 d-flex justify-content-end">
+
+            <lottie-player src="https://lottie.host/cc86e366-e4c2-4835-814a-a8148d4bba4c/36pt98mAmK.json" background="transparent" speed="1" style="width: 500px; height: 500px;" loop autoplay></lottie-player>
+        </div>
+    </div>
+
+</div>
+
+
+<section class="services-offered bg-info-subtle p-3 rounded-4">
+
+    <div class="container ">
+        <div class="text-center mt-4">
+            <h2 style="" class="display-6">Our Services</h2>
+        </div>
+        <br>
+    </div>
+
+    <div class="service-list">
+        @foreach (var service in Model.Take(6))
+        {
+            <div class="service-item">
+                <h3>@service.Name</h3>
+                <p>
+                    @if (service.Description.Length > 50)
+                    {
+                        @service.Description.Substring(0, 50)
+                        @Html.Raw("...")
+                    }
+                    else
+                    {
+                        @service.Description
+                    }
+
+                </p>
+            </div>
+        }
+    </div>
+</section>
+<br><br>
+
+<section class="customer-reviews mt-4">
+    <div class="container">
+
+        <center>
+            <h2 style=""class=" display-6">What Our Customers Say</h2>
+        </center>
+        <br>
+        <div class="review-list mt-3">
+            <!-- Customer Review 1 -->
+            <div class="review-item">
+                <p>"The facial serum worked wonders on my skin. I can't believe the difference it made!"</p>
+                <p class="customer-name">- Emily, New York</p>
+            </div>
+            <!-- Customer Review 2 -->
+            <div class="review-item">
+                <p>"The laser rejuvenation treatment gave me a new level of confidence. Highly recommended!"</p>
+                <p class="customer-name">- Alex, Los Angeles</p>
+            </div>
+            <!-- Customer Review 3 -->
+            <div class="review-item">
+                <p>"The makeup consultation helped me discover the perfect look for every occasion. Thank you, BeautyLuxe!"</p>
+                <p class="customer-name">- Jessica, Chicago</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+<br><br>
+<!-- Subscribe for Newsletter Section -->
+<section class="newsletter mt-4  p-4 rounded-4" style="background-color: #eeeeee">
+    <div class="container">
+        <center>
+            <h2 style="" class=" display-6"> Subscribe to Our Newsletter</h2>
+        </center>
+        <center>
+            <p style="">Stay updated with the latest beauty trends, exclusive offers, and skincare tips. Subscribe now!</p>
+        </center>
+        <form>
+            <input type="email" placeholder="Enter your email"/>
+            <button type="submit"  style="background-color: #ff8fab;">Subscribe</button>
+
+        </form>
+    </div>
+
+</section>

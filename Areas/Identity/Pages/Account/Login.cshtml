@@ -1,0 +1,149 @@
+﻿@page
+@model LoginModel
+
+
+<style>
+    .login-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    #login-submit,
+    #signup-submit {
+        transition: background-color 0.3s ease; /* Add smooth transition effect */
+    }
+
+        #login-submit:hover {
+            background-color: #0056b3; /* Dark blue color on hover for Sign In */
+        }
+
+        #signup-submit:hover {
+            background-color: #0056b3; /* Dark green color on hover for Sign Up */
+            color: #fff; /* Change text color to white on hover for Sign Up */
+        }
+
+    #login-submit {
+        border-radius: 15px; /* Adjust the border-radius as needed */
+        font-size: 14px; /* Adjust the font-size as needed */
+        background-color: #00a6ff; /* Change this to the desired color */
+        /* Change this to match the background color for a consistent look */
+        color: #fff; /* Text color */
+    }
+
+    #signup-submit {
+        border-radius: 15px; /* Adjust the border-radius as needed */
+        font-size: 14px; /* Adjust the font-size as needed */
+        background-color: white; /* Change this to the desired color */
+        border-color: #28a745; /* Change this to match the background color for a consistent look */
+        color: #0056b3; /* Text color */
+    }
+
+    .form-floating input {
+        border-radius: 15px; /* Adjust the border-radius as needed */
+        padding: 10px; /* Adjust the padding as needed */
+    }
+
+    .login-form {
+        width: 50%;
+        padding: 20px;
+    }
+
+    .signup-section {
+        width: 40%;
+        background: linear-gradient(to bottom right, #BADFE7,#6FB3B8, #F4A4A4);
+        color: #fff;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .signup-section h3 {
+            margin-bottom: 10px;
+        }
+
+        .signup-section p {
+            margin-bottom: 20px;
+        }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="login-container">
+    <div class="login-form">
+        <section>
+            <center><h1>Login to Your Account</h1></center>
+
+            <form id="account" method="post">
+
+                <center><h>Login using social networks</h></center>
+                <br><br>
+
+                <center><p>OR</p></center><br>
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email" class="form-label">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Password" class="form-label">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div class="text-center">
+                    <button id="login-submit" type="submit" class="w-50 btn login-submit btn-lg btn-primary rounded-pill">Sign in</button>
+                </div>
+
+                <br>
+                <div>
+                    <center>
+                        <p>
+                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        </p>
+                        <p>
+                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                        </p>
+                    </center>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <div class="signup-section overlayed-bg bg-1">
+        <h3>NEW HERE?</h3>
+        <center>
+            <p>Welcome to our website!</p>
+            <p>Sign up to unlock a world of exciting features and services tailored just for you.</p>
+        </center>
+        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" id="signup-submit" class="btn w-50 btn-success">Sign Up</a>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

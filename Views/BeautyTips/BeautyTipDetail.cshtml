@@ -1,0 +1,67 @@
+﻿@model BeautyLuxe.Models.BeautyTip
+
+@{
+    bool isAdmin = User.IsInRole("admin");
+}
+<br>
+
+<div class="container details-container">
+    <div class="text-center mt-4">
+
+        <h2>@Model.Title</h2>
+    </div>
+
+    <div class="details-content">
+        <p>@Model.Description</p>
+    </div>
+
+    <div class="details-actions">
+        @if (isAdmin)
+        {
+            <a asp-action="EditBeautyTip" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        }
+        <a asp-controller="BeautyTips" asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .details-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+    }
+
+    .details-content {
+        margin-bottom: 20px;
+    }
+
+    .details-actions {
+        text-align: right;
+    }
+
+    /*.btn-primary {*/
+    /*    background-color: #007bff;*/
+    /*    border-color: #007bff;*/
+    /*}*/
+    
+    /*.btn-secondary {*/
+    /*    background-color: #6c757d;*/
+    /*    border-color: #6c757d;*/
+    /*    margin-left: 10px;*/
+    /*}*/
+    
+    /*    .btn-primary:hover,*/
+    /*    .btn-secondary:hover {*/
+    /*        background-color: #0056b3;*/
+    /*        border-color: #0056b3;*/
+    /*    }*/
+</style>
+

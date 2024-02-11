@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BeautyLuxe.Models.Booking>
+
+<style>
+body {
+background-color: #fff;
+}
+</style>
+
+<div class="container" style="margin: 10rem auto">
+    <div class="text-center mt-4">
+        <br>
+        <h2 class="display-4">Your Bookings</h2>
+        <br>
+    </div>
+
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Service</th>
+                <th>Slot</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model)
+                {
+                    <tr>
+                        <td>@booking.Service.Name</td>
+                        <td>@booking.Slot.SlotTime</td>
+                        <td>
+                            <a asp-controller="Booking" asp-action="UpdateAppointment" asp-route-bookingId="@booking.Id" class="btn btn-primary">Update</a>
+                            <a asp-controller="Booking" asp-action="CancelAppointment" asp-route-bookingId="@booking.Id" class="btn btn-danger">Cancel</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No bookings found.</p>
+    }
+</div>

@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "User";
+}
+
+<style>
+    .custom-button {
+        background-color: #ff8fab;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .custom-button:hover {
+            background-color: #ff6b9c; /* Change color for hover if needed */
+        }
+
+    .welcome-section {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .display-4 {
+        color: #fff; /* White text color */
+    }
+
+    .dashboard-section {
+        display: flex;
+        justify-content: space-around;
+        margin: 50px 0;
+    }
+
+    .dashboard-card {
+        width: 30%;
+        padding: 20px;
+        background-color: #fff; /* White background for cards */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-card h2 {
+            color: #008080; /* Teal text color */
+        }
+
+    .service-link {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+        .service-link a {
+            padding: 10px 20px;
+            background-color: #008080; /* Teal background for the link */
+            color: #fff; /* White text color */
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+            .service-link a:hover {
+                background-color: #006666; /* Darker Teal on hover */
+            }
+</style>
+<br>
+
+<body class="overlayed-bg bg-3">
+<div style="margin: 5rem auto">
+    
+<div class="welcome-section">
+    <h1 class="display-4">Welcome to BeautyLuxe User Dashboard</h1>
+</div>
+
+<div class="dashboard-section">
+    <div class="dashboard-card">
+        <h2>Your Appointments</h2>
+        <p>View and manage your upcoming appointments.</p>
+                <a asp-controller="Booking" asp-action="UserBookings" class="custom-button">View Appointments</a>
+    </div>
+
+    <div class="dashboard-card">
+        <h2>Explore Services</h2>
+        <p>Discover a variety of beauty services we offer.</p>
+                <a asp-controller="Service" asp-action="Index" class="custom-button">View Services</a>
+    </div>
+
+    <div class="dashboard-card">
+        <h2>Beauty Tips</h2>
+        <p>Stay updated with our latest beauty tips and trends.</p>
+                <a asp-controller="BeautyTips" asp-action="Index" class="custom-button">Read Tips</a>
+    </div>
+</div>
+
+</div>
+
+</body>
