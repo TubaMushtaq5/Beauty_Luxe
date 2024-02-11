@@ -37,7 +37,4 @@
 Running the above commands shall switch you to `main` branch then removed all the cached files that have been now added to gitignored. 
 After that it creates a new commit with files removed and adds a upstream to main and pushed new commit.
 
-## Developed By
 
-- **[Abdul-Rehman](https://google.com)**
-- Other contributors
